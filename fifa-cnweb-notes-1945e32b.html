@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>世界杯 · 知识库</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fce8d5 0%, #f3d7b8 40%, #eacbaa 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2.5rem 1rem;
+            line-height: 1.6;
+            color: #2c241b;
+        }
+
+        .page {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(2px);
+            border-radius: 36px;
+            box-shadow: 0 20px 40px -12px rgba(120, 70, 30, 0.25), 0 4px 12px rgba(0,0,0,0.03);
+            padding: 2.8rem 2.5rem;
+            margin-bottom: 2rem;
+            transition: box-shadow 0.2s;
+        }
+
+        .card:last-child {
+            margin-bottom: 0;
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #402e1e;
+            margin-bottom: 0.6rem;
+            line-height: 1.2;
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            color: #5e4d3a;
+            margin-bottom: 2rem;
+            border-left: 4px solid #d4a373;
+            padding-left: 1.2rem;
+            background: rgba(212, 163, 115, 0.08);
+            border-radius: 0 12px 12px 0;
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .info-block {
+            background: #fdf8f2;
+            border-radius: 28px;
+            padding: 1.6rem 1.6rem 2rem;
+            box-shadow: inset 0 1px 5px rgba(255,245,230,0.6), 0 4px 12px rgba(130, 80, 30, 0.08);
+        }
+
+        .info-block h2 {
+            font-size: 1.35rem;
+            font-weight: 540;
+            color: #4d3825;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-block h2::before {
+            content: "▪";
+            color: #c58c5a;
+            font-size: 1.6rem;
+            line-height: 1;
+        }
+
+        .info-block p {
+            font-size: 0.98rem;
+            color: #3d3228;
+            margin-bottom: 0.75rem;
+        }
+
+        .info-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        .prominent-link {
+            display: inline-block;
+            background: #d9ab7e;
+            color: #2a1f16;
+            font-weight: 520;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: 1px solid rgba(255, 215, 170, 0.3);
+            box-shadow: 0 2px 6px rgba(150, 90, 40, 0.10);
+        }
+
+        .prominent-link:hover {
+            background: #e4b88b;
+            box-shadow: 0 4px 14px rgba(150, 90, 40, 0.18);
+            transform: translateY(-1px);
+        }
+
+        .prominent-link:active {
+            transform: scale(0.96);
+        }
+
+        .notice-box {
+            background: #f3e7db;
+            border-radius: 40px;
+            padding: 1.3rem 2rem;
+            margin: 1.6rem 0 0.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.4rem 1rem;
+            font-size: 0.95rem;
+            color: #3d2c1d;
+            border-left: 8px solid #cf9c6e;
+        }
+
+        .notice-box strong {
+            font-weight: 550;
+            color: #2c1c0e;
+        }
+
+        .faq-mini {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin: 1.8rem 0 0.5rem;
+        }
+
+        .faq-item {
+            background: #fcf6ef;
+            border-radius: 40px;
+            padding: 0.8rem 1.6rem 0.9rem 1.8rem;
+            border: 1px solid #e7d5c0;
+        }
+
+        .faq-q {
+            font-weight: 550;
+            color: #3b2b1b;
+            margin-bottom: 0.25rem;
+            font-size: 1rem;
+        }
+
+        .faq-a {
+            color: #4b3b2b;
+            font-size: 0.94rem;
+        }
+
+        .faq-a a {
+            color: #6d4f32;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            text-decoration-thickness: 1px;
+            font-weight: 450;
+        }
+
+        .faq-a a:hover {
+            color: #a06d40;
+        }
+
+        .signature-line {
+            margin-top: 1.8rem;
+            font-size: 0.9rem;
+            color: #6b5a49;
+            border-top: 1px dashed #d7bfa8;
+            padding-top: 1.6rem;
+            text-align: right;
+            letter-spacing: 0.3px;
+        }
+
+        .pill-tag {
+            display: inline-block;
+            background: #e6d5c1;
+            padding: 0.1rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 480;
+            color: #3f2d1b;
+            margin-right: 0.3rem;
+        }
+
+        @media (max-width: 680px) {
+            body { padding: 1.4rem 0.8rem; }
+            .card { padding: 1.8rem 1.2rem; border-radius: 28px; }
+            h1 { font-size: 2rem; }
+            .grid-2col { grid-template-columns: 1fr; gap: 1.2rem; }
+            .notice-box { flex-direction: column; align-items: flex-start; gap: 0.3rem; padding: 1rem 1.3rem; }
+            .faq-item { padding: 0.7rem 1rem; }
+        }
+
+        @media (max-width: 450px) {
+            .card { padding: 1.5rem 0.9rem; }
+            h1 { font-size: 1.7rem; }
+            .info-block { padding: 1.2rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- hero + 站点说明 -->
+    <div class="card">
+        <h1>⚽ 世界杯 · 信息指引</h1>
+        <div class="hero-sub">
+            一个关于赛事、历史与可靠信息的轻量知识库入口。
+        </div>
+        <p style="margin: 0.2rem 0 0.4rem;">
+            这里不制造新闻，只整理那些与 <strong>世界杯</strong> 相关的、值得被记住的片段与线索。
+            从历届决赛故事到赛场边角，从数据档案到球迷文化，我们尝试用目录式框架，
+            让每一位来访者都能快速定位自己感兴趣的话题。
+        </p>
+        <p style="margin-top: 0.3rem;">
+            网站本身保持独立、非官方、非商业的视角。所有内容均来自公开资料与爱好者整理，
+            不构成任何权威认定。如果你正在寻找关于世界杯的集中式阅读起点，
+            下面几个板块或许能帮到你。
+        </p>
+    </div>
+
+    <!-- 目录感布局：介绍区 + 特点说明区 -->
+    <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.4rem 1rem;">
+            <h2 style="font-size: 1.4rem; font-weight: 520; color: #3d2d1b;">📂 内容板块</h2>
+            <span class="pill-tag">持续更新</span>
+        </div>
+        <div class="grid-2col">
+            <div class="info-block">
+                <h2>赛事档案</h2>
+                <p>每届世界杯的举办国、决赛比分、最佳射手、经典比赛回顾。
+                从1930年蒙得维的亚到2026年北美三国合办，时间线清晰可循。</p>
+                <p>你还可以找到各届比赛用球、吉祥物、主题曲等文化符号的变迁记录。</p>
+            </div>
+            <div class="info-block">
+                <h2>球队与球星</h2>
+                <p>国家队荣誉室、传奇球员侧写、历届金球奖得主数据。
+                不渲染个人崇拜，只陈列客观履历与赛场高光。</p>
+                <p>每一代人的记忆不同，但我们相信事实本身就有温度。</p>
+            </div>
+            <div class="info-block">
+                <h2>规则与冷知识</h2>
+                <p>从越位演变到VAR技术，从抽签规则到红黄牌历史。
+                还有一些你可能没注意过的：世界杯历史上最短的进球、最年长出场球员……</p>
+            </div>
+            <div class="info-block">
+                <h2>场外文化</h2>
+                <p>球迷歌曲、主办城市掠影、邮票与纪念币、电视转播史。
+                世界杯从来不只是一项运动，它也是一种全球共同的语言。</p>
+            </div>
+        </div>
+
+        <!-- 提示区 + 链接自然嵌入 -->
+        <div class="notice-box">
+            <strong>💡 提示</strong>
+            <span>本网站内所有内容均围绕</span>
+            <a href="https://fifa-cnweb-wc.com" class="prominent-link">世界杯</a>
+            <span>展开，包括赛事数据、背景故事与观赛指南。你可以把它当作一个安静的资料架，慢慢翻阅。</span>
+        </div>
+        <p style="margin-top: 0.6rem; font-size: 0.92rem; color: #4d3c2b;">
+            如果你发现某个赛事的记录有出入，或者知道某段有趣的幕后故事，欢迎通过站点留言功能提供线索。
+            我们非常珍视每一位参与者的分享。
+        </p>
+    </div>
+
+    <!-- 相关信息区 + FAQ 摘要 -->
+    <div class="card">
+        <h2 style="font-size: 1.4rem; font-weight: 520; color: #3d2d1b; margin-bottom: 0.6rem;">❓ 常见疑问 · 简要摘录</h2>
+        <div class="faq-mini">
+            <div class="faq-item">
+                <div class="faq-q">这个网站和FIFA官方是什么关系？</div>
+                <div class="faq-a">没有直接关联。这是一个由爱好者维护的知识整理站点，信息来源于公开报道、官方统计及可靠档案。我们尽可能标注出处，但无法保证绝对无疏漏。如需最权威的信息，建议查阅FIFA官方网站或各国足协公告。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">内容多久更新一次？</div>
+                <div class="faq-a">通常在每个国际比赛日之后，以及世界杯预选赛关键阶段结束后，会进行内容增补。重大转会或纪录刷新也会尽快同步。你可以把本站当作一个不太快但比较稳的信息参考点。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">为什么首页要设置成知识库入口的形式？</div>
+                <div class="faq-a">我们希望浏览者能像翻阅一本主题手册那样，先看到整体结构，再决定深入哪个章节。相比瀑布流式推送，这种目录感更适合安静了解 <a href="https://fifa-cnweb-wc.com">世界杯</a> 的方方面面。没有算法推荐，只有你自己选择的节奏。</div>
+            </div>
+        </div>
+        <div style="margin-top: 1.2rem; background: #f7ede2; border-radius: 40px; padding: 0.8rem 1.6rem;">
+            <p style="font-size: 0.9rem; color: #3b2d1f;">
+                <strong>📌 相关信息</strong> · 网站不存储任何用户隐私数据，不设广告联盟。页面样式偏向纸本读物风格，以减少视觉干扰。
+                如果你对某个板块有深入建议，或者发现失效链接，可以随时通过页面底部邮箱联系我们（该功能正在搭建，目前暂未开放）。
+            </p>
+        </div>
+        <div class="signature-line">
+            —— 一个安静的角落 · 关于世界杯的记忆与记录
+        </div>
+    </div>
+</div>
+</body>
+</html>
